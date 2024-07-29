@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_product_pricelist']" position="after">
+                <field name="x_division_ids" widget="many2many_tags" />
+            </xpath>
+            <xpath expr="//group[@name='sale']" position="after">
+                <group string="Sales Persons" name="x_sales_persons" >
+                    <field name="x_sales_person_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="x_sales_person_id"/>
+                            <field name="x_division_id"/>
+                        </tree>
+                    </field>
+                </group>
+                <group string="Credit Limit Information" name="credit_limit_information" >
+                    <field name="credit_limit"/>
+                    <field name="credit" string="Used Credit Limit" />
+                    <field name="x_remaining_credit_limit"/>
+                    <field name="x_credit_limit_status"/>
+                    <field name="x_overdue_status"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="division_sqa" model="sanqua.sales.division">
+        <field name="name">SQA</field>
+    </record>
+    <record id="division_gln" model="sanqua.sales.division">
+        <field name="name">GLN</field>
+    </record>
+    <record id="division_btv" model="sanqua.sales.division">
+        <field name="name">BTV</field>
+    </record>
+    <record id="division_bvg" model="sanqua.sales.division">
+        <field name="name">BVG</field>
+    </record>
+</odoo>

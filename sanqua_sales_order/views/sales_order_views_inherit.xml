@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Inherit Form View -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">sale.order.form.inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                    <field name="x_division_id" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+                    
+            </xpath>
+            <xpath expr="//field[@name='partner_shipping_id']" position="after">
+                    <field name="x_pickup_method" attrs="{'readonly': [('state', 'not in', ['draft', 'sent'])]}"/>
+                    <field name="overlimit_status" invisible="1" />
+                    <field name="overdue_status" invisible="1" />
+                    <field name="overlimit_and_overdue_status" invisible="1" />
+
+            </xpath>
+
+            <xpath expr="//sheet/div[@name='button_box']" position="after">
+                <widget name="web_ribbon" title="Overlimit" bg_color="bg-warning" attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('overlimit_status', '=', False)]}"/>
+                <widget name="web_ribbon" title="Overdue" bg_color="bg-danger" attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('overdue_status', '=', False)]}"/>
+                <widget name="web_ribbon" title="Overlimit and Overdue" bg_color="bg-danger" attrs="{'invisible': ['|', ('state', '!=', 'sale'), ('overlimit_and_overdue_status', '=', False)]}"/>
+            </xpath>
+
+            <xpath expr="//notebook/page[@name='order_lines']/field[@name='order_line']/tree/field[@name='product_id']" position="replace">
+                <field name="product_id" 
+                    domain="[('sale_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id), ('product_tmpl_id.x_division_id', '=', parent.x_division_id)]" 
+                    context="{'partner_id':parent.partner_id, 'quantity':product_uom_qty, 'pricelist':parent.pricelist_id, 'uom':product_uom, 'company_id': parent.company_id}" 
+                    attrs="{'readonly': [('product_updatable', '=', False)], 'required': [('display_type', '=', False)]}" 
+                    force_save="1" />
+                    <!-- widget="many2one_barcode"/> -->
+            </xpath>
+        </field>
+    </record>
+
+     <!-- Inherit Search View -->
+     <record id="view_order_search_inherit_by_division" model="ir.ui.view">
+        <field name="name">sale.order.search.view.inherit.by.division</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.sale_order_view_search_inherit_sale"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='salesperson']" position="after">
+                <filter string="Division" name="group_by_division" context="{'group_by':'x_division_id'}"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="x_division_id" string="Division"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Tree View -->
+    <record id="view_order_tree_inherit_by_division" model="ir.ui.view">
+        <field name="name">sale.order.tree.view.inherit.by.division</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="x_division_id" string="Division"/>
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>

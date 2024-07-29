@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access.sanqua.sales.division,access_sanqua_sales_division,model_sanqua_sales_division,base.group_user,1,1,1,1
+access.res.partner.sales.person,access_res_partner_sales_person,model_res_partner_sales_person,base.group_user,1,1,1,1
+access.sale.order.warning.wizard,access_sale_order_warning_wizard,model_sale_order_warning_wizard,base.group_user,1,1,1,1

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form View -->
+    <record id="view_sales_division_form" model="ir.ui.view">
+        <field name="name">sanqua.sales.division.form</field>
+        <field name="model">sanqua.sales.division</field>
+        <field name="arch" type="xml">
+            <form string="Sanqua Sales Division">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="x_product_pricelist_id"/>
+                            <field name="x_note"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="view_sales_division_tree" model="ir.ui.view">
+        <field name="name">sanqua.sales.division.tree</field>
+        <field name="model">sanqua.sales.division</field>
+        <field name="arch" type="xml">
+            <tree string="Sanqua Sales Division">
+                <field name="name"/>
+                <field name="x_product_pricelist_id"/>
+                <field name="x_note"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_sales_division" model="ir.actions.act_window">
+        <field name="name">Sales Divisions</field>
+        <field name="res_model">sanqua.sales.division</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_create">
+                Click to create a new Sales Division.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item -->
+    <menuitem id="sales_division_config"
+        name="Sales Divisions"
+        parent="sale.sale_order_menu"
+        action="action_sales_division"
+        sequence="100"/>
+
+</odoo>

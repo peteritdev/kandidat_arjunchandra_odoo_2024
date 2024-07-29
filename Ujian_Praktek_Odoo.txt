@@ -1,0 +1,22 @@
+Bagaimana anda dapat menentukan kebutuhan dari server yang diperlukan berdasarkan
+jumlah concurrent user pengguna odoo? Jelaskan jawaban anda sesuai yang anda pahami
+selama ini.
+Untuk menentukan kebutuhan server yang diperlukan berdasarkan jumlah pengguna concurrent Odoo, 
+ada beberapa faktor yang perlu dipertimbangkan seperti jumlah RAM, CPU, dan Storage.
+
+Contoh Untuk 100 pengguna dengan asumsi 50% concurrent (50 pengguna):
+RAM: perkiraan kebutuhan RAM total adalah 50 x 200 MB = 10 GB RAM.
+CPU: 4 cores
+Storage: SSD 100 GB
+
+
+
+- Apakah implementasi Odoo wajib memisahkan antara aplikasi dan database dengan server
+yang berbeda? Atau apakah Odoo dapat berjalan maksimal hanya di 1 server saja?
+Jelaskan jawaban anda sesuai dengan pemahaman anda.
+tidak diwajibkan untuk memisahkan antara aplikasi dan database tergantung kepada penggunaan serta jumlah concurent user.
+Memisahkan aplikasi dan database pada server yang berbeda sering disarankan untuk sistem yang lebih besar atau lingkungan produksi dengan traffic tinggi
+
+
+untuk saat ini, diperusahaan tempat saya bekerja hanya menggunakan 1 server saja khusus untuk odoo dan database nya.
+secara peforma untuk sekitar 35 concurrent user masih terbilang baik.
